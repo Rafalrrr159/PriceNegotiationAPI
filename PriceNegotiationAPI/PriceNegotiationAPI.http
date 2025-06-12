@@ -1,1 +1,22 @@
 @PriceNegotiationAPI_HostAddress = http://localhost:5064
+
+GET {{PriceNegotiationAPI_HostAddress}}/api/products/
+Accept: application/json
+###e
+
+POST {{PriceNegotiationAPI_HostAddress}}/api/products/
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Moja Ksi¹¿ka",
+  "price": 29.99,
+  "description": "Ciekawa pozycja do czytania w wolnej chwili."
+}
+
+###
+
+GET {{PriceNegotiationAPI_HostAddress}}/api/products/9bb70b7f-2a44-458d-b667-9888d7d34f41
+Accept: application/json
+
+###
