@@ -1,4 +1,7 @@
 using PriceNegotiationAPI;
+using PriceNegotiationAPI.Interfaces;
+using PriceNegotiationAPI.Repositories;
+using PriceNegotiationAPI.Services;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +13,9 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
+
+builder.Services.AddSingleton<IProductRepository, InMemoryProductRepository>();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 var app = builder.Build();
 
