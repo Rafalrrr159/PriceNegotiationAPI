@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PriceNegotiationAPI.DTOs.Product;
 using PriceNegotiationAPI.Exceptions;
@@ -18,6 +19,7 @@ namespace PriceNegotiationAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Employee")]
         public async Task<ActionResult> CreateProduct([FromBody] CreateProductDto dto)
         {
             try
@@ -32,6 +34,7 @@ namespace PriceNegotiationAPI.Controllers
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<ProductDto>> GetProductById([FromRoute] Guid id)
         {
             try
@@ -50,6 +53,7 @@ namespace PriceNegotiationAPI.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllProducts()
         {
             try

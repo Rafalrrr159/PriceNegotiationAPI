@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PriceNegotiationAPI.DTOs.Negotiation;
 using PriceNegotiationAPI.Exceptions;
@@ -19,6 +20,7 @@ namespace PriceNegotiationAPI.Controllers
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetNegotiationById(Guid id)
         {
             try
@@ -37,6 +39,7 @@ namespace PriceNegotiationAPI.Controllers
         }
 
         [HttpGet("product/{productId}")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAllNegotiationsForProduct(Guid productId)
         {
             try
@@ -51,6 +54,7 @@ namespace PriceNegotiationAPI.Controllers
         }
 
         [HttpGet("active")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetActiveNegotiations()
         {
             try
@@ -65,6 +69,7 @@ namespace PriceNegotiationAPI.Controllers
         }
 
         [HttpPost("propose")]
+        [AllowAnonymous]
         public async Task<IActionResult> ProposePrice([FromBody] CreateNegotiationDto createDto)
         {
             try
@@ -91,6 +96,7 @@ namespace PriceNegotiationAPI.Controllers
         }
 
         [HttpPost("{id}/accept")]
+        [Authorize(Roles = "Employee")]
         public async Task<IActionResult> AcceptNegotiation(Guid id)
         {
             try
@@ -113,6 +119,7 @@ namespace PriceNegotiationAPI.Controllers
         }
 
         [HttpPost("{id}/reject")]
+        [Authorize(Roles = "Employee")]
         public async Task<IActionResult> RejectNegotiation(Guid id)
         {
             try
@@ -135,6 +142,7 @@ namespace PriceNegotiationAPI.Controllers
         }
 
         [HttpPost("{id}/cancel")]
+        [Authorize(Roles = "Employee")]
         public async Task<IActionResult> CancelNegotiation(Guid id)
         {
             try
