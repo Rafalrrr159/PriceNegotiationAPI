@@ -18,12 +18,11 @@ namespace PriceNegotiationAPI.Repositories
             return Task.FromResult(_negotiations.Where(n => n.ProductId == productId).ToList());
         }
 
-        public Task<Negotiation?> GetActiveNegotiationByClientIdAndProductIdAsync(Guid clientId, Guid productId)
+        public Task<List<Negotiation>> GetNegotiationsByClientIdAndProductIdAsync(Guid clientId, Guid productId)
         {
-            return Task.FromResult(_negotiations.FirstOrDefault(n =>
-                n.ClientId == clientId &&
-                n.ProductId == productId &&
-                (n.Status == NegotiationStatus.Proposed || n.Status == NegotiationStatus.Rejected)));
+            return Task.FromResult(_negotiations
+                .Where(n => n.ClientId == clientId && n.ProductId == productId)
+                .ToList());
         }
 
         public Task AddAsync(Negotiation negotiation)

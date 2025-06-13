@@ -25,6 +25,8 @@ builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 builder.Services.AddSingleton<IProductRepository, InMemoryProductRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddSingleton<INegotiationRepository, InMemoryNegotiationRepository>();
+builder.Services.AddScoped<INegotiationService, NegotiationService>();
 
 var app = builder.Build();
 
