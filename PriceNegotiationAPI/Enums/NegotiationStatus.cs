@@ -5,6 +5,7 @@
         Proposed,
         Accepted,
         Rejected,
-        Canceled
+        Canceled,
+        Expired
     }
 }

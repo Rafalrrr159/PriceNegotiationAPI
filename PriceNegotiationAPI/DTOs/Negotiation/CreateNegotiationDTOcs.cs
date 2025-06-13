@@ -8,6 +8,9 @@ namespace PriceNegotiationAPI.DTOs.Negotiation
         public Guid ProductId { get; set; }
 
         [Required]
+        public Guid ClientId { get; set; }
+
+        [Required]
         [Range(0.01, double.MaxValue, ErrorMessage = "Proposed price must be greater than zero.")]
         public decimal ProposedPrice { get; set; }
     }

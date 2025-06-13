@@ -9,6 +9,8 @@ namespace PriceNegotiationAPI.Models
 
         public Guid ProductId { get; set; }
 
+        public Guid ClientId { get; set; }
+
         [Range(0.01, double.MaxValue, ErrorMessage = "Proposed price must be greater than zero.")]
         public decimal ProposedPrice { get; set; }
 
@@ -26,7 +28,7 @@ namespace PriceNegotiationAPI.Models
 
         private Negotiation() { }
 
-        public Negotiation(Guid productId, decimal initialProposedPrice)
+        public Negotiation(Guid productId, decimal initialProposedPrice, Guid clientId)
         {
             if (initialProposedPrice <= 0)
             {
@@ -35,6 +37,7 @@ namespace PriceNegotiationAPI.Models
 
             Id = Guid.NewGuid();
             ProductId = productId;
+            ClientId = clientId;
             ProposedPrice = initialProposedPrice;
             ProposedDate = DateTime.UtcNow;
             Status = NegotiationStatus.Proposed;
